@@ -1,0 +1,12 @@
+.btn-variant {
+    width: 100%;
+    border: 1.5px solid black;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.text-variant {
+    width: 100%;
+    background: #2c6bac;
+    color: #ffff;
+}
