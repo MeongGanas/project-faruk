@@ -170,8 +170,8 @@
                         "
                         size="x-large"
                         type="submit"
-                        >Login</v-btn
-                    >
+                        >Login
+                    </v-btn>
                 </v-card>
             </v-form>
         </v-sheet>

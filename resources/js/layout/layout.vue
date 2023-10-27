@@ -74,7 +74,7 @@
 
         <!-- <v-layout> -->
         <v-main>
-            <v-layout class="h-[90%]">
+            <v-layout class="h-100">
                 <slot></slot>
             </v-layout>
         </v-main>
