@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="w-full pa-5 flex flex-wrap justify-center gap-5">
+    <div class="w-full pa-5 flex flex-wrap gap-4">
         <v-card class="pb-5" width="240" height="240">
             <v-img
                 src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"

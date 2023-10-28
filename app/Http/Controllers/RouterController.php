@@ -19,4 +19,8 @@ class RouterController extends Controller
     {
         return inertia::render('lists');
     }
+    public function setting()
+    {
+        return inertia::render('setting');
+    }
 }
