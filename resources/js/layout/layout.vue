@@ -15,7 +15,7 @@
                     <span class="mx-2"
                         ><v-icon icon="mdi:mdi-chevron-right"></v-icon
                     ></span>
-                    <h1 class="text-lg font-semibold">{{ page }}</h1>
+                    <h1 class="text-[16px] font-semibold">{{ page }}</h1>
                 </div>
             </v-app-bar-title>
             <template v-slot:append>
@@ -104,8 +104,6 @@
     </v-app>
 </template>
 <script>
-import { usePage } from "@inertiajs/vue3";
-import { router } from "@inertiajs/vue3";
 import { ref, onMounted, watchEffect } from "vue";
 
 export default {
@@ -129,13 +127,7 @@ export default {
 
         function updatePageFromUrl() {
             const route = window.location.pathname;
-            if (route === "/home") {
-                pageName.value = "Home";
-            } else if (route === "/lists") {
-                pageName.value = "Lists";
-            } else if (route === "/setting") {
-                pageName.value = "Settings";
-            }
+            pageName.value = route.slice(1, route.length);
         }
 
         return { page, goToRoute };

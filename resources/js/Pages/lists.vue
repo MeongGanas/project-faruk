@@ -9,6 +9,7 @@
 
             <v-card-title
                 link
+                @click="detail"
                 class="underline cursor-pointer"
                 style="font-weight: 600"
                 >List 1</v-card-title
@@ -148,8 +149,16 @@
 </template>
 <script>
 import layout from "@/layout/layout.vue";
+import { router } from "@inertiajs/vue3";
 export default {
     layout: layout,
+    setup() {
+        function detail() {
+            router.visit("/detailList");
+        }
+
+        return { detail };
+    },
 };
 </script>
 <style lang=""></style>
