@@ -9,7 +9,7 @@
 
             <v-card-title
                 link
-                @click="detail"
+                @click="detailAdmin"
                 class="underline cursor-pointer"
                 style="font-weight: 600"
                 >List 1</v-card-title
@@ -34,6 +34,7 @@
 
             <v-card-title
                 link
+                @click="detailParticipant"
                 class="underline cursor-pointer"
                 style="font-weight: 600"
             >
@@ -153,11 +154,14 @@ import { router } from "@inertiajs/vue3";
 export default {
     layout: layout,
     setup() {
-        function detail() {
-            router.visit("/detailList");
+        function detailAdmin() {
+            router.visit("/adminList");
+        }
+        function detailParticipant() {
+            router.visit("/participantList");
         }
 
-        return { detail };
+        return { detailAdmin, detailParticipant };
     },
 };
 </script>

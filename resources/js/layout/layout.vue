@@ -94,7 +94,7 @@
             </v-list-item>
         </v-navigation-drawer>
 
-        <v-main>
+        <v-main class="w-100">
             <v-layout class="h-100">
                 <slot></slot>
             </v-layout>

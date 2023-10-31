@@ -1,9 +1,9 @@
 <template lang="">
     <v-app>
         <v-main>
-            <v-row style="margin: 0px">
+            <v-row class="ma-0 w-100">
                 <v-col style="padding: 0px">
-                    <div class="min-w-[400px] flex justify-center items-center">
+                    <div class="min-w-[350px] flex justify-center items-center">
                         <h1 class="absolute text-white text-6xl">Welcome!</h1>
                         <img
                             src="../../../public/storage/background.png"
@@ -13,8 +13,11 @@
                     </div>
                 </v-col>
                 <v-col style="padding: 0px">
-                    <v-card flat class="h-screen d-flex justify-center">
-                        <div class="py-10 min-w-[360px] max-w-[400px]">
+                    <v-card
+                        flat
+                        class="h-screen d-flex justify-center min-w-[350px]"
+                    >
+                        <div class="py-10 min-w-[350px] max-w-[400px]">
                             <v-card-text>
                                 <div class="text-center">
                                     <h1
@@ -209,7 +212,7 @@
                         type="text"
                         name="username"
                         id="username"
-                        v-model="registerData.username"
+                        v-model="registerData.name"
                     />
 
                     <label for="email" class="block font-semibold mb-1"
@@ -254,8 +257,68 @@
             </v-form>
         </v-sheet>
     </v-dialog>
+
+    <v-dialog v-model="messageDialog">
+        <v-sheet
+            elevation="12"
+            max-width="600"
+            rounded="lg"
+            width="100%"
+            class="pa-4 text-center mx-auto"
+        >
+            <v-icon
+                class="mb-5"
+                color="error"
+                icon="error"
+                size="112"
+                v-if="isError"
+            ></v-icon>
+            <v-icon
+                class="mb-5"
+                color="#2c6bac"
+                icon="check"
+                size="112"
+                v-else
+            ></v-icon>
+
+            <h2
+                class="text-h5 mb-6"
+                v-if="isError && typeof message === 'object'"
+                v-for="error in message"
+            >
+                {{ error[0] }}
+            </h2>
+            <h2 class="text-h5 mb-6" v-else>{{ message }}</h2>
+
+            <div class="text-end">
+                <v-btn
+                    class="text-none"
+                    color="error"
+                    rounded
+                    variant="flat"
+                    width="90"
+                    @click="closeDialog"
+                    v-if="isError"
+                >
+                    Close
+                </v-btn>
+                <v-btn
+                    class="text-none"
+                    color="#2c6bac"
+                    rounded
+                    variant="flat"
+                    width="90"
+                    @click="closeDialog"
+                    v-else
+                >
+                    Close
+                </v-btn>
+            </div>
+        </v-sheet>
+    </v-dialog>
 </template>
 <script>
+import { router } from "@inertiajs/vue3";
 import axios from "axios";
 import { reactive, ref } from "vue";
 
@@ -263,6 +326,7 @@ export default {
     setup() {
         const login_dialog = ref(false);
         const register_dialog = ref(false);
+        const messageDialog = ref(false);
 
         const loginData = reactive({
             email: "",
@@ -275,21 +339,66 @@ export default {
             password: "",
         });
 
+        const message = ref();
+        const isError = ref(false);
+
         function login() {
-            console.log(loginData);
+            const loginForm = new FormData();
+            loginForm.append("email", loginData.email);
+            loginForm.append("password", loginData.password);
+
+            axios
+                .post("/login", loginForm)
+                .then((res) => {
+                    isError.value = false;
+                    message.value = res.data.message;
+                    messageDialog.value = true;
+                    setTimeout(() => {
+                        router.visit("/home");
+                    }, 1000);
+                })
+                .catch((err) => {
+                    isError.value = true;
+                    message.value = err.response.data.message;
+                    messageDialog.value = true;
+                });
         }
 
         function register() {
-            console.log(registerData);
+            const registerForm = new FormData();
+            registerForm.append("name", registerData.name);
+            registerForm.append("email", registerData.email);
+            registerForm.append("password", registerData.password);
+
+            axios
+                .post("/register", registerForm)
+                .then((res) => {
+                    isError.value = false;
+                    message.value = res.data.message;
+                    messageDialog.value = true;
+                })
+                .catch((err) => {
+                    isError.value = true;
+                    message.value = err.response.data.errors;
+                    messageDialog.value = true;
+                });
+        }
+
+        function closeDialog() {
+            messageDialog.value = false;
         }
 
         return {
             loginData,
             registerData,
+            message,
+            isError,
             login_dialog,
             register_dialog,
+            messageDialog,
             login,
             register,
+            closeDialog,
         };
     },
 };

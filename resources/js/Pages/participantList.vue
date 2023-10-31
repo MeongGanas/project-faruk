@@ -16,7 +16,7 @@
             <v-window-item value="home" class="pa-5">
                 <HomeDetail />
             </v-window-item>
-            <v-window-item value="people" class="pa-10">
+            <v-window-item value="people" class="pa-5">
                 <PeopleDetail />
             </v-window-item>
         </v-window>
