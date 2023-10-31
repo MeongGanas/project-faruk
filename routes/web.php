@@ -18,4 +18,5 @@ Route::get('/', [RouterController::class, 'login_page']);
 Route::get('/home', [RouterController::class, 'home']);
 Route::get('/lists', [RouterController::class, 'lists']);
 Route::get('/setting', [RouterController::class, 'setting']);
-Route::get('/detailList', [RouterController::class, 'detailList']);
+Route::get('/adminList', [RouterController::class, 'adminList']);
+Route::get('/participantList', [RouterController::class, 'participantList']);

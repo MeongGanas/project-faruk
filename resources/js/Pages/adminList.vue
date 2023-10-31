@@ -47,8 +47,8 @@
 <script>
 import layout from "@/layout/layout.vue";
 
-import HomeDetail from "@/components/home_detail.vue";
-import AttendanceDetail from "@/components/attendance_detail.vue";
+import HomeDetail from "@/components/admin/home_detail.vue";
+import AttendanceDetail from "@/components/admin/attendance_detail.vue";
 import PeopleDetail from "@/components/people_detail.vue";
 export default {
     layout: layout,

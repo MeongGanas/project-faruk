@@ -25,7 +25,7 @@
                 </v-btn>
             </template>
         </v-app-bar>
-        <v-navigation-drawer :width="220" v-model="drawer" class="py-3">
+        <v-navigation-drawer :width="250" v-model="drawer" class="py-3">
             <v-list-item
                 link
                 @click="goToRoute('/home')"
@@ -94,13 +94,11 @@
             </v-list-item>
         </v-navigation-drawer>
 
-        <!-- <v-layout> -->
         <v-main>
             <v-layout class="h-100">
                 <slot></slot>
             </v-layout>
         </v-main>
-        <!-- </v-layout> -->
     </v-app>
 </template>
 <script>
